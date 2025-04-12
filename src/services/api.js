@@ -23,6 +23,9 @@ api.interceptors.request.use(
     }
 )
 
+
+
+
 export const getTourById = async (tourId) => {
     try{
         const token = localStorage.getItem('authToken')
@@ -114,5 +117,43 @@ export const registerUser = async (user) => {
     }
 }
 
+
+
+export const addTourOnBasket = async (tourId) => {
+    try {
+        const token = localStorage.getItem('authToken')
+            const response = await api.post('/basket/tours/' + tourId, {}, {headers: {'Authorization': `Bearer ${token}`}})
+            return response.data
+        
+       
+    } catch (error) {
+        console.error('Error adding tour to basket:', error)
+        throw error
+    }
+}
+
+
+export const getBasket = async () => {
+    try{
+        const token = localStorage.getItem('authToken')
+        const response = await api.get('/basket/tours', {headers: {'Authorization': `Bearer ${token}`}})
+        return response.data
+    }catch(error){
+        console.error('Error fetching basket:', error)
+        throw error
+    }
+}
+
+
+export const removeTourFromBasket = async (tourId) => {
+    try{
+        const token = localStorage.getItem('authToken')
+        const response = await api.delete('/basket/tours/' + tourId, {headers: {'Authorization': `Bearer ${token}`}})
+        return response.data
+    }catch(error){
+        console.error('Error removing tour from basket:', error)
+        throw error
+    }
+}
 
 export default api

@@ -19,7 +19,7 @@ const NavBar: React.FC = () => {
     router.push("/login");
   };
 
-  const authValue = token ? "Logout" : "Login";
+  const authValue = token ? "Выйти" : "Войти";
   const authUrl = token ? "#" : "/login";
 
   return (
@@ -27,7 +27,10 @@ const NavBar: React.FC = () => {
       <h1 className="navbar-title">Tour App</h1>
       <ul className="navbar-list">
         <li className="navbar-item">
-          <Link className="navbar-link" href="/">Home</Link>
+          <Link className="navbar-link" href="/">Главный</Link>
+        </li>
+        <li>
+          <Link href="/basket">Корзина</Link>
         </li>
         <li className="navbar-item">
           {token ? (
