@@ -36,29 +36,24 @@ const LoginPage: React.FC = () => {
     try {
       const response = await loginUser(loginData);
       if (response && response.token) {
-        console.log("Успешный логин");
-        console.log("Токен:", response.token);
+        document.cookie = `token=${response.token}; path=/`;
         localStorage.setItem("authToken", response.token);
         router.push("/");
       } else {
-        console.error("Ошибка при логине");
         setErrorMessage("Ошибка при логине. Проверьте данные или попробуйте позже.");
       }
     } catch (error) {
-      console.error("Ошибка:", error);
       setErrorMessage("Ошибка при логине. Проверьте данные или попробуйте позже.");
     } finally {
       setLoading(false);
     }
-    
-    console.log("Данные для логина:", loginData);
   };
 
   return (
-    <div>
-      <h1>Login Page</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="email">Email</label>
+    <div className="login-container">
+      <h1 className="login-title">Login Page</h1>
+      <form className="login-form" onSubmit={handleSubmit}>
+        <label className="login-label" htmlFor="email">Email</label>
         <input
           type="text"
           id="email"
@@ -66,9 +61,10 @@ const LoginPage: React.FC = () => {
           value={loginData.email}
           onChange={handleChange}
           required
+          className="login-input"
         />
 
-        <label htmlFor="password">Password</label>
+        <label className="login-label" htmlFor="password">Password</label>
         <input
           type="password"
           id="password"
@@ -76,14 +72,15 @@ const LoginPage: React.FC = () => {
           value={loginData.password}
           onChange={handleChange}
           required
+          className="login-input"
         />
 
-        <button type="submit" disabled={loading}>
+        <button type="submit" disabled={loading} className="login-button">
           {loading ? "Загрузка..." : "Login"}
         </button>
       </form>
-      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-      <Link href="/register">Register</Link>
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
+      <Link href="/register" className="register-link">Register</Link>
     </div>
   );
 };

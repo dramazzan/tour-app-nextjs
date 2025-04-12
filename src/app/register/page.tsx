@@ -11,8 +11,7 @@ interface RegisterData {
 }
 
 const RegisterPage: React.FC = () => {
-
-    const router = useRouter();
+  const router = useRouter();
 
   const [registerData, setRegisterData] = useState<RegisterData>({
     username: "",
@@ -32,11 +31,8 @@ const RegisterPage: React.FC = () => {
     try {
       const response = await registerUser(registerData);
       if (response) {
-        console.log("Успешная регистрация");
-        console.log("Ответ:", response);
         router.push("/login");
       } else {
-        console.error("Ошибка при регистрации");
         alert("Ошибка при регистрации. Проверьте данные или попробуйте позже.");
       }
     } catch (error) {
@@ -45,10 +41,10 @@ const RegisterPage: React.FC = () => {
   };
 
   return (
-    <>
-      <h1>Register Page</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Username</label>
+    <div className="register-container">
+      <h1 className="register-title">Register Page</h1>
+      <form className="register-form" onSubmit={handleSubmit}>
+        <label className="register-label" htmlFor="username">Username</label>
         <input
           type="text"
           id="username"
@@ -56,8 +52,9 @@ const RegisterPage: React.FC = () => {
           value={registerData.username}
           onChange={handleChange}
           required
+          className="register-input"
         />
-        <label htmlFor="email">Email</label>
+        <label className="register-label" htmlFor="email">Email</label>
         <input
           type="email"
           id="email"
@@ -65,8 +62,9 @@ const RegisterPage: React.FC = () => {
           value={registerData.email}
           onChange={handleChange}
           required
+          className="register-input"
         />
-        <label htmlFor="password">Password</label>
+        <label className="register-label" htmlFor="password">Password</label>
         <input
           type="password"
           id="password"
@@ -74,10 +72,11 @@ const RegisterPage: React.FC = () => {
           value={registerData.password}
           onChange={handleChange}
           required
+          className="register-input"
         />
-        <button type="submit">Register</button>
+        <button type="submit" className="register-button">Register</button>
       </form>
-    </>
+    </div>
   );
 };
 

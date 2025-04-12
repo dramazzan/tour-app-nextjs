@@ -1,0 +1,125 @@
+/* Общий сброс стилей и базовые настройки */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #ffffff;
+    color: #333333;
+    line-height: 1.6;
+  }
+  
+  /* Основной контейнер страницы */
+  .home-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  /* Заголовки и подзаголовок */
+  .welcome-title,
+  .tours-title {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    font-weight: 600;
+  }
+  
+  .welcome-subtitle {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.25rem;
+    color: #555555;
+  }
+  
+  /* Блок управления поиском и сортировкой */
+  .search-sort-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .search-input,
+  .sort-select {
+    padding: 0.5rem 1rem;
+    border: 1px solid #eaeaea;
+    border-radius: 4px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+    background-color: #fafafa;
+  }
+  
+  .search-input:focus,
+  .sort-select:focus {
+    border-color: #0070f3;
+  }
+  
+  /* Контейнер карточек – используем grid, чтобы карточки выстраивались равномерно */
+  .tours-container {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    /* Заставляем карточки растягиваться */
+    align-items: stretch;
+  }
+  
+  /* Карточка тура – делаем её flex-контейнером для равномерного распределения контента */
+  .tour-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #ffffff;
+    border: 1px solid #eaeaea;
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    /* Минимальная высота для сохранения пропорции карточек */
+    min-height: 300px;
+  }
+  
+  .tour-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Стилизация элементов внутри карточки */
+  .tour-name {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .tour-description {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: #555555;
+    /* При необходимости можно ограничить высоту и добавить ellipsis */
+    overflow: hidden;
+  }
+  
+  .tour-price {
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  
+  /* Стилизация кнопки "Подробнее" */
+  .tour-link-button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    background: #0070f3;
+    color: #ffffff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .tour-link-button:hover {
+    background: #005bb5;
+  }
+  
