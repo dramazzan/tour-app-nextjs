@@ -1,9 +1,17 @@
+import Link from "next/link"
 
 
-const navbar = () => {
+const NavBar = () => {
   return (
-    <div>navbar</div>
+    <nav>
+        <ul>
+            <li>
+                <Link href="/">Home</Link>
+                <Link href="/login">Login</Link>
+            </li>
+        </ul>
+    </nav>
   )
 }
 
-export default navbar
+export default NavBar
