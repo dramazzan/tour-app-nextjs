@@ -2,8 +2,15 @@
 
 import { useState } from "react";
 import { addTour } from "@/services/api";
+import { useRouter } from "next/navigation";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
+const MySwal = withReactContent(Swal);
 
 const CreateTourPage = () => {
+  const router = useRouter();
+
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -36,20 +43,28 @@ const CreateTourPage = () => {
     try {
       const response = await addTour(tourData);
       console.log("Created tour:", response);
-      alert("Tour created successfully!");
+      MySwal.fire({
+        title: "Успех",
+        text: "Тур был успешно создан!",
+        icon: "success",
+        confirmButtonText: "Ок",
+      });
+      router.push("/admin/tours");
     } catch (error) {
       console.error("Error creating tour:", error);
-      alert("Failed to create tour.");
+      MySwal.fire({
+        title: "Ошибка",
+        text: "Не удалось создать тур. Попробуйте позже.",
+        icon: "error",
+        confirmButtonText: "Ок",
+      });
     }
   };
 
   return (
     <div className="create-tour-container">
       <h1 className="create-tour-title">Create Tour Form</h1>
-      <form
-        onSubmit={handleSubmit}
-        className="create-tour-form"
-      >
+      <form onSubmit={handleSubmit} className="create-tour-form">
         <label className="create-tour-label">
           Name:
           <input
@@ -134,10 +149,7 @@ const CreateTourPage = () => {
           />
         </label>
 
-        <button
-          type="submit"
-          className="create-tour-button"
-        >
+        <button type="submit" className="create-tour-button">
           Create Tour
         </button>
       </form>

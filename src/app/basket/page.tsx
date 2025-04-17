@@ -4,6 +4,10 @@ import { useEffect, useState } from "react";
 import { Tour } from "@/models/tour";
 import { getBasket, removeTourFromBasket } from "@/services/api";
 import Link from "next/link";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
+const MySwal = withReactContent(Swal);
 
 const BasketPage = () => {
   const [tours, setTours] = useState<Tour[]>([]);
@@ -28,12 +32,35 @@ const BasketPage = () => {
 
   const handleRemove = async (tourId: number) => {
     try {
-      await removeTourFromBasket(tourId);
-      setTours((prev) => prev.filter((t) => t.id !== tourId));
-      alert("Тур удалён из корзины");
+      const result = await MySwal.fire({
+        title: "Удалить этот тур?",
+        text: "Вы уверены, что хотите удалить этот тур из корзины?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Да, удалить",
+        cancelButtonText: "Отмена",
+      });
+
+      if (result.isConfirmed) {
+        await removeTourFromBasket(tourId);
+        setTours((prev) => prev.filter((t) => t.id !== tourId));
+        MySwal.fire({
+          title: "Тур удалён",
+          text: "Тур был удалён из корзины.",
+          icon: "success",
+          confirmButtonText: "Ок",
+        });
+      }
     } catch (err) {
       console.error("Ошибка при удалении тура", err);
-      alert("Произошла ошибка при удалении");
+      MySwal.fire({
+        title: "Ошибка",
+        text: "Произошла ошибка при удалении тура.",
+        icon: "error",
+        confirmButtonText: "Ок",
+      });
     }
   };
 
@@ -56,10 +83,10 @@ const BasketPage = () => {
               </div>
               <div className="basket-actions">
                 <Link href={`/tours/${tour.id}`}>
-                  <button className="tour-link-button">Подробнее</button>
+                  <button className="basket-tour-link-button">Подробнее</button>
                 </Link>
                 <button
-                  className="button-remove"
+                  className="basket-button-remove"
                   onClick={() => handleRemove(tour.id)}
                 >
                   Удалить

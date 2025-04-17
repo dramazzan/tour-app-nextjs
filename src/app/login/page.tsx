@@ -4,6 +4,7 @@ import React, { useState, FormEvent } from "react";
 import { loginUser } from "@/services/api";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import {Button} from '@/components/ui/button'
 
 interface LoginData {
   email: string;
@@ -78,6 +79,7 @@ const LoginPage: React.FC = () => {
         <button type="submit" disabled={loading} className="login-button">
           {loading ? "Загрузка..." : "Login"}
         </button>
+  
       </form>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
       <Link href="/register" className="register-link">Register</Link>

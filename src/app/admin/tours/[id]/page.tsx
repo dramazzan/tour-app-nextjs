@@ -1,22 +1,23 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
-import { getTourById, updateTour } from "@/services/api";
+import { useParams, useRouter } from "next/navigation";
+import { getTourById, updateTour, deleteTour } from "@/services/api";
 import { Tour } from "@/models/tour";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
-// Функция для преобразования дат из ISO в формат YYYY-MM-DD
+const MySwal = withReactContent(Swal);
+
 const formatDate = (dateString: string): string => {
   if (!dateString) return "";
   const date = new Date(dateString);
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const day = String(date.getDate()).padStart(2, "0");
-  return `${year}-${month}-${day}`;
+  return date.toISOString().split("T")[0];
 };
 
 const UpdateTourPage: React.FC = () => {
   const params = useParams();
+  const router = useRouter();
   const tourId = params.id;
 
   const [tour, setTour] = useState<Tour>({
@@ -36,17 +37,24 @@ const UpdateTourPage: React.FC = () => {
     const fetchTour = async () => {
       try {
         const response = await getTourById(tourId);
+        
+        if (!response || !response.id) {
+          router.push("/admin/tours");
+          return;
+        }
+  
         setTour(response);
-        console.log("Fetched tour:", response);
       } catch (error) {
         console.error("Error fetching tour:", error);
+        router.push("/admin/tours"); // редирект при ошибке
       }
     };
-
+  
     if (tourId) {
       fetchTour();
     }
-  }, [tourId]);
+  }, [tourId, router]);
+  
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -70,22 +78,61 @@ const UpdateTourPage: React.FC = () => {
     };
 
     try {
-      const response = await updateTour(tourId, updatedTour);
-      console.log("Updated tour:", response);
-      alert("Tour updated successfully!");
+      await updateTour(tourId, updatedTour);
+      MySwal.fire({
+        title: "Успех",
+        text: "Тур успешно обновлен!",
+        icon: "success",
+        confirmButtonText: "Ок",
+      });
+      router.push('/admin/tours')
     } catch (error) {
       console.error("Error updating tour:", error);
-      alert("Failed to update tour.");
+      MySwal.fire({
+        title: "Ошибка",
+        text: "Не удалось обновить тур. Попробуйте позже.",
+        icon: "error",
+        confirmButtonText: "Ок",
+      });
+    }
+  };
+
+  const handleDelete = async () => {
+    const confirmed = await MySwal.fire({
+      title: "Подтверждение удаления",
+      text: "Вы уверены, что хотите удалить этот тур?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Да, удалить",
+      cancelButtonText: "Отмена",
+    });
+
+    if (!confirmed.isConfirmed) return;
+
+    try {
+      await deleteTour(tourId);
+      MySwal.fire({
+        title: "Успех",
+        text: "Тур был удален успешно!",
+        icon: "success",
+        confirmButtonText: "Ок",
+      });
+      router.push("/admin/tours");
+    } catch (error) {
+      console.error("Error deleting tour:", error);
+      MySwal.fire({
+        title: "Ошибка",
+        text: "Не удалось удалить тур.",
+        icon: "error",
+        confirmButtonText: "Ок",
+      });
     }
   };
 
   return (
     <div className="update-tour-container">
       <h1 className="update-tour-title">Update Tour Form</h1>
-      <form
-        onSubmit={handleSubmit}
-        className="update-tour-form"
-      >
+      <form onSubmit={handleSubmit} className="update-tour-form">
         <label className="update-tour-label">
           Name:
           <input
@@ -170,12 +217,18 @@ const UpdateTourPage: React.FC = () => {
           />
         </label>
 
-        <button
-          type="submit"
-          className="update-tour-button"
-        >
-          Update Tour
-        </button>
+        <div className="update-tour-buttons">
+          <button type="submit" className="update-tour-button">
+            Редактировать тур
+          </button>
+          <button
+            type="button"
+            onClick={handleDelete}
+            className="update-tour-button delete-button"
+          >
+            Удалить тур
+          </button>
+        </div>
       </form>
     </div>
   );

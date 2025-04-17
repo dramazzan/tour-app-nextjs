@@ -16,7 +16,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [token, setToken] = useState<string | null>(null);
 
   useEffect(() => {
-    // При монтировании читаем токен из localStorage
     const storedToken = localStorage.getItem("authToken");
     setToken(storedToken);
   }, []);

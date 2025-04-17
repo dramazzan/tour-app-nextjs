@@ -3,6 +3,11 @@
     margin: 0 auto;
     padding: 20px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+  
   }
   
   .tour-list-title {
@@ -14,17 +19,28 @@
   
   .tour-cards-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+    grid-template-columns: 250px 250px 250px 250px;
+    grid-template-rows: auto auto;
+    row-gap: 10px;
+    column-gap: 20px;
   }
   
   .tour-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
     padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+    background-color: #f3f3f3;
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
     text-align: left;
+  }
+
+  .tour-card > div{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
   
   .tour-card-title {
@@ -48,4 +64,69 @@
     color: red;
     text-align: center;
   }
+
+  .create-tour-button{
+    text-decoration: none;
+    width: 70%;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .create-tour-button:hover{
+    background-color: #0056b3;
+  }
+
   
+  .update-link{
+    padding: 8px 14px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #007bff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+    text-align: center;
+  }
+
+  .update-link:hover{
+    background-color: #0056b3;
+  }
+
+
+  .delete-button{
+    padding: 8px 14px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #dc3545;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+    text-align: center;
+  }
+
+  .delete-button:hover{
+    background-color: #b30015;
+  }
+
+
+  .btns-box{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    margin-top: 20px;
+    gap: 10px;
+  }
+
+
+ 

@@ -19,23 +19,24 @@
     padding: 2rem;
   }
   
-  /* Заголовки и подзаголовок */
   .welcome-title,
   .tours-title {
     text-align: center;
     margin-bottom: 1rem;
-    font-size: 2rem;
     font-weight: 600;
+  }
+
+  .welcome-title{
+    opacity: 0.8;
   }
   
   .welcome-subtitle {
     text-align: center;
     margin-bottom: 2rem;
     font-size: 1.25rem;
-    color: #555555;
+    color: #cdcaca;
   }
   
-  /* Блок управления поиском и сортировкой */
   .search-sort-container {
     display: flex;
     justify-content: center;
@@ -59,16 +60,13 @@
     border-color: #0070f3;
   }
   
-  /* Контейнер карточек – используем grid, чтобы карточки выстраивались равномерно */
   .tours-container {
     display: grid;
     gap: 2rem;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    /* Заставляем карточки растягиваться */
     align-items: stretch;
   }
   
-  /* Карточка тура – делаем её flex-контейнером для равномерного распределения контента */
   .tour-card {
     display: flex;
     flex-direction: column;
@@ -79,7 +77,6 @@
     padding: 1.5rem;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
-    /* Минимальная высота для сохранения пропорции карточек */
     min-height: 300px;
   }
   
@@ -88,7 +85,6 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   }
   
-  /* Стилизация элементов внутри карточки */
   .tour-name {
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
@@ -98,7 +94,6 @@
     font-size: 1rem;
     margin-bottom: 1rem;
     color: #555555;
-    /* При необходимости можно ограничить высоту и добавить ellipsis */
     overflow: hidden;
   }
   
@@ -107,7 +102,6 @@
     margin-bottom: 1rem;
   }
   
-  /* Стилизация кнопки "Подробнее" */
   .tour-link-button {
     padding: 0.5rem 1rem;
     border: none;
@@ -123,3 +117,19 @@
     background: #005bb5;
   }
   
+
+
+  .main-box{
+    background-image: url( '/image.png');
+    background-size: cover;
+    background-position: center;
+    height: 500px;
+    color:#fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 52px;
+    border-radius: 10px;
+    margin: 10px 0 50px;
+}

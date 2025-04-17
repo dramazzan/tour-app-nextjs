@@ -33,6 +33,8 @@ export default function RootLayout({
           <NavBar />
           {children}
         </AuthProvider>
+          
+          
       </body>
     </html>
   );
