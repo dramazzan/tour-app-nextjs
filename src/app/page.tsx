@@ -79,7 +79,7 @@ export default function Home() {
     <div className="home-container">
       <div className="main-box">
         <h1 className="welcome-title">Tour Agency Go App</h1>
-        <p className="welcome-subtitle">Welcome to the Tour App!</p>
+        <p className="welcome-subtitle">Добро пожаловать в наш сайт!</p>
       </div>
 
       <h1 className="tours-title">Туры</h1>

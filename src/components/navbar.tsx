@@ -58,22 +58,25 @@ const NavBar: React.FC = () => {
           <li>
             <Link className="navbar-link" href="/basket">Корзина</Link>
           </li>
+          <li>
+            <Link className="navbar-link" href="/dashboard">Профиль</Link>
+          </li>
           <li className="navbar-item">
             {isLoggedIn ? (
-              <a
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleLogout();
-                }}
-                className="navbar-link"
-              >
-                Выйти
-              </a>
+                <a
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleLogout();
+                    }}
+                    className="navbar-link"
+                >
+                  Выйти
+                </a>
             ) : (
-              <Link className="navbar-link" href="/login">
-                Войти
-              </Link>
+                <Link className="navbar-link" href="/login">
+                  Войти
+                </Link>
             )}
           </li>
         </ul>

@@ -1,9 +1,7 @@
-/* basket.css - Надежные стили для компонента корзины */
 
-/* Основной контейнер */
 .basket-container {
     max-width: 1000px;
-    margin: 0 auto;
+    margin: 50px auto;
     padding: 24px;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     color: #333;
@@ -95,7 +93,7 @@
     padding: 8px 14px;
     font-size: 14px;
     color: #fff;
-    background-color: #007BFF;
+    background-color: #3500d3;
     border: 1px solid #ddd;
     border-radius: 4px;
     cursor: pointer;
@@ -104,7 +102,7 @@
   }
   
   .basket-tour-link-button:hover {
-    background-color: #0056b3;
+    background-color: #240090;
   }
   
   .basket-button-remove {

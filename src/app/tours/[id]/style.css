@@ -40,23 +40,23 @@
 .button-add {
   margin-top: 20px;
   padding: 10px 20px;
-  background-color: #13cc5a;
+  background-color: #257712;
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 5px;
   font-size: 15px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .button-add:hover {
-  background-color: #09b34a;
+  background-color: #055323;
 }
 
 .button-remove {
   margin-top: 20px;
   padding: 10px 20px;
-  background-color: #e53935;
+  background-color: #9a1f1c;
   color: white;
   border: none;
   border-radius: 8px;
@@ -95,7 +95,7 @@
 }
 .tour-image-wrapper {
   position: relative;
-  display: inline-block; /* Чтобы изображение было в блоке */
+  display: inline-block;
 }
 
 .tour_image {
@@ -178,7 +178,7 @@
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 4px;
-    background: #0070f3;
+    background: #3500d3;
     color: #ffffff;
     font-size: 1rem;
     cursor: pointer;
@@ -186,7 +186,7 @@
   }
   
   .tour-link-button:hover {
-    background: #005bb5;
+    background: #240090;
   }
   
   .between-title{

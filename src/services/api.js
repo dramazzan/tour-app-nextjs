@@ -1,4 +1,6 @@
 import axios from 'axios'
+import jwt from "jsonwebtoken";
+
 
 const api = axios.create({
     baseURL: 'http://localhost:8080/',
@@ -117,6 +119,28 @@ export const registerUser = async (user) => {
     }
 }
 
+export const GetCurrentUser = async () =>{
+    try{
+        const token = localStorage.getItem('authToken')
+        const response = await api.get('/user/dashboard' , {headers: {'Authorization': `Bearer ${token}`}})
+        return response.data
+    }catch (error) {
+        console.error('Error getting current user:', error)
+        throw error
+    }
+}
+
+export const UpdateCurrentUser = async (user) =>{
+    try{
+        const token = localStorage.getItem('authToken')
+        const response = await api.put('/user/update' , user , {headers: {'Authorization': `Bearer ${token}`}})
+        return response.data
+    }catch(error){
+        console.error('Error updating current user:', error)
+        throw error
+    }
+}
+
 
 
 export const addTourOnBasket = async (tourId) => {
@@ -155,5 +179,27 @@ export const removeTourFromBasket = async (tourId) => {
         throw error
     }
 }
+
+
+export const isAdmin = ()=> {
+    try {
+        const token = localStorage.getItem('authToken');
+
+        if (!token) {
+            return false;
+        }
+
+        const decoded = jwt.decode(token);
+        if (decoded && decoded.role === 'admin') {
+            return true;
+        }
+
+        return false;
+    } catch (error) {
+        console.error('Error fetching isAdmin:', error);
+        throw error;
+    }
+};
+
 
 export default api

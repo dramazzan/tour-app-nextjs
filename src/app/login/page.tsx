@@ -52,9 +52,9 @@ const LoginPage: React.FC = () => {
 
   return (
     <div className="login-container">
-      <h1 className="login-title">Login Page</h1>
+      <h1 className="login-title">Авторизация</h1>
       <form className="login-form" onSubmit={handleSubmit}>
-        <label className="login-label" htmlFor="email">Email</label>
+        <label className="login-label" htmlFor="email">Почта</label>
         <input
           type="text"
           id="email"
@@ -65,7 +65,7 @@ const LoginPage: React.FC = () => {
           className="login-input"
         />
 
-        <label className="login-label" htmlFor="password">Password</label>
+        <label className="login-label" htmlFor="password">Пароль</label>
         <input
           type="password"
           id="password"
@@ -77,12 +77,12 @@ const LoginPage: React.FC = () => {
         />
 
         <button type="submit" disabled={loading} className="login-button">
-          {loading ? "Загрузка..." : "Login"}
+          {loading ? "Загрузка..." : "Войти"}
         </button>
   
       </form>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
-      <Link href="/register" className="register-link">Register</Link>
+      <Link href="/register" className="register-link">Еще не зарегистрированы? Вам сюда</Link>
     </div>
   );
 };
